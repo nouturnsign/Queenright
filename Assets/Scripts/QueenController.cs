@@ -21,8 +21,7 @@ public class QueenController : MonoBehaviour
     // custom logic
     [SerializeField] private float moveSpeed = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
