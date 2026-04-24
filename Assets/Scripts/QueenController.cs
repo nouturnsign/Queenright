@@ -13,7 +13,6 @@ public class QueenController : MonoBehaviour
 
     // Unity inputs
     private InputAction moveAction;
-
     private Vector2 moveValue;
 
     // Unity physics
@@ -21,7 +20,6 @@ public class QueenController : MonoBehaviour
 
     // custom logic
     [SerializeField] private float moveSpeed = 0f;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
