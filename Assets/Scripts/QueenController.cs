@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 [RequireComponent(typeof(Animator))]
-
 [RequireComponent(typeof(Rigidbody2D))]
-
 [RequireComponent(typeof(SpriteRenderer))]
 public class QueenController : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class QueenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveValue = moveAction.ReadValue<Vector2>();   
+        moveValue = moveAction.ReadValue<Vector2>();
         bool isWalking = Mathf.Abs(moveValue.x) > 0.01f;
         if (moveValue.x > 0)
             spriteRenderer.flipX = true;
@@ -48,6 +47,5 @@ public class QueenController : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(moveValue.x * moveSpeed, rb.linearVelocity.y);
-        
     }
 }
