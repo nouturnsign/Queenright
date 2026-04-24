@@ -133,7 +133,9 @@ GameObject:
   - component: {fileID: 64317722}
   - component: {fileID: 64317721}
   - component: {fileID: 64317723}
-  m_Layer: 0
+  - component: {fileID: 64317724}
+  - component: {fileID: 64317725}
+  m_Layer: 6
   m_Name: Queen Ant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +189,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6109951990552608374, guid: cfe046386732c4c80afae43bc8fa170b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -208,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 64317717}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.41, y: -1.59, z: 0}
+  m_LocalPosition: {x: -7.3, y: -1.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -321,7 +323,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843582969309d4b1eb3f52c0a3ab48e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QueenController
-  moveSpeed: 1
+  moveSpeed: 2
+--- !u!114 &64317724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64317717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1192079e1e25745aebe239b6b4adb471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  antPrefab: {fileID: 4678642942467053307, guid: 4681655d79c4049dab693a98d9e405e3, type: 3}
+  swarmSize: 10
+  spawnRadius: 3
+--- !u!114 &64317725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64317717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1192079e1e25745aebe239b6b4adb471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AntSpawner
+  antPrefab: {fileID: 918734542183979724, guid: 2ef9805f4b91b477fae2cd56e1ac3a1c, type: 3}
+  swarmSize: 10
+  spawnRadius: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +588,7 @@ GameObject:
   - component: {fileID: 808711432}
   - component: {fileID: 808711436}
   - component: {fileID: 808711437}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
