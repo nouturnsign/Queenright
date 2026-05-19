@@ -17,6 +17,7 @@ public class FollowQueen : MonoBehaviour
     [SerializeField] private float millingSpeed = 0f;
     [SerializeField] private float catchUpDistance = 0f;
     [SerializeField] private float catchUpSpeed = 0f;
+    [SerializeField] private float teleportCatchUpDistance = 0f;
     [SerializeField] private float irreparableLagDistance = 0f;
     [SerializeField] private float queenPullStrength = 0f;
     
@@ -70,9 +71,18 @@ public class FollowQueen : MonoBehaviour
         float dynamicOffset = myFlockOffset + (Mathf.Sin(Time.time * millingSpeed + myRandomPhaseOffset) * millingDistance);
         float targetX = queenX + dynamicOffset;
         float currentX = transform.position.x;
+        float distanceFromQueen = Mathf.Abs(queenX - currentX);
 
         // calculate distance and check if we need to move
         float distanceToTarget = Mathf.Abs(targetX - currentX);
+
+        if (teleportCatchUpDistance > 0f && distanceFromQueen > teleportCatchUpDistance)
+        {
+            TeleportToTarget(targetX, queenTransform.position.y);
+            currentX = transform.position.x;
+            distanceToTarget = Mathf.Abs(targetX - currentX);
+            isCatchingUp = false;
+        }
 
         // Hysteresis for catch-up mode: turn on when too far, stay on until we reach the target
         if (distanceToTarget > catchUpDistance)
@@ -139,5 +149,10 @@ public class FollowQueen : MonoBehaviour
 
         float excessLag = distanceBehindQueen - irreparableLagDistance;
         return excessLag * queenPullStrength;
+    }
+
+    private void TeleportToTarget(float targetX, float queenY)
+    {
+        transform.position = new Vector3(targetX, queenY, transform.position.z);
     }
 }

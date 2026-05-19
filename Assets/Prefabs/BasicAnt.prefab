@@ -209,6 +209,7 @@ MonoBehaviour:
   millingSpeed: 2
   catchUpDistance: 2.5
   catchUpSpeed: 3.4
+  teleportCatchUpDistance: 18
   irreparableLagDistance: 8
   queenPullStrength: 5
   groundCheckDistance: 1.5
