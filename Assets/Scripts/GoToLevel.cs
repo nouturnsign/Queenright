@@ -9,4 +9,9 @@ public class GoToLevel : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
 }
