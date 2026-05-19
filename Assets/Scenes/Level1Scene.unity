@@ -337,7 +337,6 @@ MonoBehaviour:
   weaverClickProbeDistance: 3
   bridgeAnchorEmbedDepth: 0.15
   bridgeAntSpacingMultiplier: 0.65
-  bridgeNormalSmoothing: 0.75
 --- !u!114 &64317724
 MonoBehaviour:
   m_ObjectHideFlags: 0
