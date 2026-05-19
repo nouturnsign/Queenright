@@ -209,3 +209,8 @@ MonoBehaviour:
   millingSpeed: 2
   catchUpDistance: 2.5
   catchUpSpeed: 3.4
+  groundCheckDistance: 1.5
+  rotationSpeed: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256

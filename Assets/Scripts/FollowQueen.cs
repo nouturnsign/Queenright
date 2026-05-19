@@ -17,6 +17,10 @@ public class FollowQueen : MonoBehaviour
     [SerializeField] private float millingSpeed = 0f;
     [SerializeField] private float catchUpDistance = 0f;
     [SerializeField] private float catchUpSpeed = 0f;
+    
+    [SerializeField] private float groundCheckDistance = 1.5f;
+    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private LayerMask groundLayer;
 
     private Transform queenTransform;
     private float myFlockOffset;
@@ -90,5 +94,15 @@ public class FollowQueen : MonoBehaviour
         }
 
         animator.SetBool(IsWalkingHash, isWalking);
+
+        // handle ground rotation mapping
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
+        if (hit.collider != null)
+        {
+            float targetAngle = Mathf.Atan2(hit.normal.y, hit.normal.x) * Mathf.Rad2Deg - 90f;
+            float currentAngle = transform.eulerAngles.z;
+            float smoothedAngle = Mathf.LerpAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, 0, smoothedAngle);
+        }
     }
 }
