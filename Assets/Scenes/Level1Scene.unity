@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 64317721}
   - component: {fileID: 64317723}
   - component: {fileID: 64317724}
-  - component: {fileID: 64317725}
   - component: {fileID: 64317726}
   m_Layer: 6
   m_Name: Queen Ant
@@ -350,21 +349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   antPrefab: {fileID: 4678642942467053307, guid: 4681655d79c4049dab693a98d9e405e3, type: 3}
-  swarmSize: 10
-  spawnRadius: 3
---- !u!114 &64317725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64317717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1192079e1e25745aebe239b6b4adb471, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AntSpawner
-  antPrefab: {fileID: 2915279422356175464, guid: c77fecc8b380444289840184f7d57627, type: 3}
   swarmSize: 10
   spawnRadius: 3
 --- !u!114 &64317726
