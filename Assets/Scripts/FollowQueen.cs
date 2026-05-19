@@ -17,6 +17,8 @@ public class FollowQueen : MonoBehaviour
     [SerializeField] private float millingSpeed = 0f;
     [SerializeField] private float catchUpDistance = 0f;
     [SerializeField] private float catchUpSpeed = 0f;
+    [SerializeField] private float irreparableLagDistance = 0f;
+    [SerializeField] private float queenPullStrength = 0f;
     
     [SerializeField] private float groundCheckDistance = 1.5f;
     [SerializeField] private float rotationSpeed = 10f;
@@ -26,9 +28,11 @@ public class FollowQueen : MonoBehaviour
     private float myFlockOffset;
     private float myActualSpeed;
     private float myRandomPhaseOffset;
+    private float lastQueenX;
     private bool isCatchingUp;
     private static readonly float MinSpeed = 1f;
     private static readonly float CloseEnough = 0.05f;
+    private static readonly float QueenMovingThreshold = 0.01f;
 
     void Awake()
     {
@@ -43,6 +47,7 @@ public class FollowQueen : MonoBehaviour
         if (queen != null)
         {
             queenTransform = queen.transform;
+            lastQueenX = queenTransform.position.x;
         }
         else
         {
@@ -58,9 +63,12 @@ public class FollowQueen : MonoBehaviour
     {
         if (queenTransform == null) return;
 
+        float queenX = queenTransform.position.x;
+        float queenDeltaX = queenX - lastQueenX;
+
         // Calculate where this specific ant wants to stand on the X axis
         float dynamicOffset = myFlockOffset + (Mathf.Sin(Time.time * millingSpeed + myRandomPhaseOffset) * millingDistance);
-        float targetX = queenTransform.position.x + dynamicOffset;
+        float targetX = queenX + dynamicOffset;
         float currentX = transform.position.x;
 
         // calculate distance and check if we need to move
@@ -82,6 +90,7 @@ public class FollowQueen : MonoBehaviour
         {
             // Move strictly along the X axis using Time.deltaTime
             float currentSpeed = isCatchingUp ? catchUpSpeed : myActualSpeed;
+            currentSpeed += CalculateQueenPullBoost(currentX, queenX, queenDeltaX);
             float step = currentSpeed * Time.deltaTime;
             float newX = Mathf.MoveTowards(currentX, targetX, step);
             transform.position = new Vector3(newX, transform.position.y, transform.position.z);
@@ -104,5 +113,31 @@ public class FollowQueen : MonoBehaviour
             float smoothedAngle = Mathf.LerpAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0, 0, smoothedAngle);
         }
+
+        lastQueenX = queenX;
+    }
+
+    private float CalculateQueenPullBoost(float antX, float queenX, float queenDeltaX)
+    {
+        if (Mathf.Abs(queenDeltaX) <= QueenMovingThreshold)
+        {
+            return 0f;
+        }
+
+        bool queenMovingRight = queenDeltaX > 0f;
+        bool isTrailingBehindQueen = queenMovingRight ? antX < queenX : antX > queenX;
+        if (!isTrailingBehindQueen)
+        {
+            return 0f;
+        }
+
+        float distanceBehindQueen = Mathf.Abs(queenX - antX);
+        if (distanceBehindQueen <= irreparableLagDistance)
+        {
+            return 0f;
+        }
+
+        float excessLag = distanceBehindQueen - irreparableLagDistance;
+        return excessLag * queenPullStrength;
     }
 }
